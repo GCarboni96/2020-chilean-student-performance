@@ -1,4 +1,11 @@
 *.csv
+*.zip
+*.CPG
+*.prj
+*.shx
+*.sbx
+*.dbf
+*.sbn
 *.jar
 target/
 .idea/
