@@ -6,6 +6,10 @@
 *.sbx
 *.dbf
 *.sbn
+*.shp
+*.shp.xml
+*.pdf
+*.rar
 *.jar
 target/
 .idea/
