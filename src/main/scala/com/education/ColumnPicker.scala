@@ -2,12 +2,12 @@ package com.education
 
 import org.apache.spark.sql.types.{IntegerType, StringType, StructField, StructType}
 import org.apache.spark.sql.{DataFrame, Row, SparkSession}
-import org.apache.spark.sql.functions.lit
+import org.apache.spark.sql.functions.{lit, col}
 
 import scala.util.Try
 
 object ColumnPicker{
-  def run(spark: SparkSession, out:String) {
+  def run(spark: SparkSession, out:String, cols: List[String]) {
     def hasColumn(df: DataFrame, path: String) = Try(df(path)).isSuccess
 
     val dfs = new Array[DataFrame](2019-2002+1)
@@ -19,18 +19,13 @@ object ColumnPicker{
         .option("sep", ";")
         .load(path)
 
-      if (!hasColumn(df, "nom_reg_rbd_a")) {
-        df = df.withColumn("nom_reg_rbd_a", lit(null).cast(StringType))
+      for (name<-cols){
+        if (!hasColumn(df, name)) {
+          df = df.withColumn(name, lit(null).cast(StringType))
+        }
       }
-      if (!hasColumn(df, "cod_pro_rbd")) {
-        df = df.withColumn("cod_pro_rbd", lit(null).cast(StringType))
-      }
-      if (!hasColumn(df, "cod_ense2")) {
-        df = df.withColumn("cod_ense2", lit(null).cast(StringType))
-      }
-
-      val picked = df.select("agno", "rbd", "nom_rbd", "cod_reg_rbd", "nom_reg_rbd_a", "cod_pro_rbd", "cod_com_rbd", "nom_com_rbd",
-        "rural_rbd", "cod_ense2", "cod_grado", "gen_alu", "prom_gral", "asistencia")
+     
+      val picked = df.select(cols.map(col): _*)
 
       val filtered = picked.filter(t => t.get(11) != "0" || t.get(12) != "0")
 
