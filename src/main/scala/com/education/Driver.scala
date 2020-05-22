@@ -15,11 +15,7 @@ object Driver {
       .config(sparkConf)
       .getOrCreate()
 
-    val cols = List("agno", "rbd", "nom_rbd", "cod_reg_rbd", "nom_reg_rbd_a", "cod_pro_rbd", "cod_com_rbd", "nom_com_rbd",
-    "rural_rbd", "cod_ense2", "cod_grado", "gen_alu", "prom_gral", "asistencia")
-
-    //ColumnPicker.run(spark, "out/performance_cleaning/")
-    YearlyAverage.run(spark, "out/performance_cleaning/*.csv", "out/yearly")
+    //YearlyAverage().run(spark, "out/yearly")
+    Reprobation().run(spark,"out/reprobation")
   }
-
 }

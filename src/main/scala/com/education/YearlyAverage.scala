@@ -1,25 +1,22 @@
 package com.education
 
-import org.apache.spark.sql.types.{DoubleType, IntegerType, StringType, StructField, StructType}
+import org.apache.spark.sql.types.{DoubleType, IntegerType, StructField, StructType}
 import org.apache.spark.sql.{Row, SparkSession}
 
-object YearlyAverage {
-  def run(spark:SparkSession, in: String, out:String) {
-    val rdd = spark.read.format("csv")
-    .option("header", "true").option("inferschema", "true")
-    .option("sep", ";")
-    .load(in).rdd
-    // "agno", "rbd", "nom_rbd", "cod_reg_rbd",
-    // "nom_reg_rbd_a", "cod_pro_rbd", "cod_com_rbd",
-    // "nom_com_rbd", "rural_rbd", "cod_ense2",
-    // "cod_grado" "gen_alu", "prom_gral",
-    // "asistencia"
+case class YearlyAverage() {
+  def run(spark:SparkSession, out_path:String) {
+    val cols = List("agno", "rbd", "gen_alu", "prom_gral", "asistencia")
+    val picked = ColumnPicker().pick_columns(spark, cols)
+    val filtered = picked.filter(picked("prom_gral") =!= 0 || picked("asistencia") =!= 0)
+    val rdd = filtered.rdd
+
     val selected = rdd.map(t =>
       ((t.get(0), t.get(1)),
-        (t.get(12).toString.replace(',','.').toDouble,
-      if (t.get(12)!=0) 1 else 0,
-          t.get(13).toString.replace(',','.').toDouble,
-          if (t.get(13)!=0) 1 else 0)))
+        (t.get(2).toString.replace(',','.').toDouble,
+      if (t.get(2)!=0) 1 else 0,
+          t.get(3).toString.replace(',','.').toDouble,
+          if (t.get(3)!=0) 1 else 0)))
+
     val grouped = selected.reduceByKey((a,b) =>  (a._1 + b._1 , a._2 + b._2, a._3 + b._3 ,a._4 + b._4))
     val averaged = grouped.map(t=> Row(t._1._1, t._1._2, t._2._1/t._2._2, t._2._3/t._2._4))
     val schema = StructType(
@@ -30,10 +27,7 @@ object YearlyAverage {
         StructField(name="avg_assistance", dataType = DoubleType, nullable = true)
       )
     )
-
-    val df = spark.sqlContext.createDataFrame(averaged, schema)
-    df.coalesce(1).write.option("header", "true").option("delimiter",";").csv(out)
-
-    //averaged.saveAsTextFile(out)
+    val out = spark.sqlContext.createDataFrame(averaged, schema)
+    out.coalesce(1).write.option("header", "true").option("delimiter",";").csv(out_path)
   }
 }
