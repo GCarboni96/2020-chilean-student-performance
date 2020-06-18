@@ -1,7 +1,9 @@
 package com.education
 
 import org.apache.spark.SparkConf
-import org.apache.spark.sql.SparkSession
+import org.apache.spark.sql.{DataFrame, SparkSession}
+import org.apache.spark.sql.functions.{col, lit}
+import org.apache.spark.sql.types.StringType
 
 object Driver {
   def main(args: Array[String]) {
@@ -16,6 +18,6 @@ object Driver {
       .getOrCreate()
 
     //YearlyAverage().run(spark, "out/yearly")
-    Reprobation().run(spark,"out/reprobation")
+    Reprobation().run(spark,"out/reprobation3")
   }
 }
