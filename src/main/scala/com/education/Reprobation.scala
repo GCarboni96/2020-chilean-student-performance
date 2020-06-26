@@ -21,15 +21,22 @@ case class Reprobation(){
             .otherwise(col("cod_depe") - lit(1)))).alias("cod_depe")
     )
 
-    // Aggregate
+    // Count every (year, rural indicator, final situation, dependance code) tuple
     val aggregated = coalesced.groupBy("agno", "rural_rbd", "sit_fin", "cod_depe").agg(count(lit(1)).alias("count"))
     aggregated.cache()
+    val totals_rural = aggregated.drop("sit_fin").groupBy("agno", "rural_rbd").agg(sum("count").alias("total_rural"))
+    val totals_depe = aggregated.drop("sit_fin").groupBy("agno", "cod_depe").agg(sum("count").alias("total_depe"))
 
-    val totals = aggregated.drop("sit_fin").groupBy("agno", "rural_rbd").agg(sum("count").alias("total"))
-
+    // Filter aggregated to get reprobated students
     val filtered = aggregated.filter(aggregated("sit_fin") === "R").drop("sit_fin")
-    val joined = filtered.join(totals, Seq("agno", "rural_rbd"))
+    filtered.cache()
 
-    joined.coalesce(1).write.option("header", "true").option("delimiter",";").csv(out_path)
+    // Join with totals to get ration of reprobated students and total students
+    val joined_rural = filtered.join(totals_rural, Seq("agno", "rural_rbd"))
+      .select(col("agno"), (col("count") / col("total_rural")).alias("rural_reprobation"))
+    val joined_depe = filtered.join(totals_depe, Seq("agno", "cod_depe"))
+      .select(col("agno"), (col("count") / col("total_depe")).alias("depe_reprobation"))
+
+    joined_rural.coalesce(1).write.option("header", "true").option("delimiter",";").csv(out_path)
   }
 }

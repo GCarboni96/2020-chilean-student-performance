@@ -18,6 +18,6 @@ object Driver {
       .getOrCreate()
 
     //YearlyAverage().run(spark, "out/yearly")
-    Reprobation().run(spark,"out/reprobation3")
+    Reprobation().run(spark,"out/reprobation")
   }
 }
