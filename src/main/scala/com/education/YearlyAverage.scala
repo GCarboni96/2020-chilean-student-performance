@@ -6,7 +6,7 @@ import org.apache.spark.sql.{Row, SparkSession}
 case class YearlyAverage() {
   def run(spark:SparkSession, out_path:String) {
     val cols = List("agno", "rbd", "gen_alu", "prom_gral", "asistencia")
-    val picked = ColumnPicker().pick_columns(spark, cols)
+    val picked = PerformanceDataset().pick_columns(spark, cols)
     val filtered = picked.filter(picked("prom_gral") =!= 0 || picked("asistencia") =!= 0)
     val rdd = filtered.rdd
 

@@ -6,7 +6,7 @@ import org.apache.spark.sql.functions.{lit, col}
 
 import scala.util.Try
 
-case class ColumnPicker(){
+case class PerformanceDataset(){
   def hasColumn(df: DataFrame, path: String): Boolean = Try(df(path)).isSuccess
 
   def pick_columns(spark: SparkSession, cols: List[String]): DataFrame = {
