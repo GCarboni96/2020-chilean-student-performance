@@ -30,13 +30,16 @@ case class Reprobation(){
     // Filter aggregated to get reprobated students
     val filtered = aggregated.filter(aggregated("sit_fin") === "R").drop("sit_fin")
     filtered.cache()
+    val rep_rural = filtered.groupBy("agno", "rural_rbd").agg(sum("count").alias("reprobated"))
+    val rep_depe = filtered.groupBy("agno", "cod_depe").agg(sum("count").alias("reprobated"))
 
     // Join with totals to get ration of reprobated students and total students
-    val joined_rural = filtered.join(totals_rural, Seq("agno", "rural_rbd"))
-      .select(col("agno"), (col("count") / col("total_rural")).alias("rural_reprobation"))
-    val joined_depe = filtered.join(totals_depe, Seq("agno", "cod_depe"))
-      .select(col("agno"), (col("count") / col("total_depe")).alias("depe_reprobation"))
+    val joined_rural = rep_rural.join(totals_rural, Seq("agno", "rural_rbd"))
+      .select(col("agno"), (col("reprobated") / col("total_rural")).alias("rural_reprobation"))
+    val joined_depe = rep_depe.join(totals_depe, Seq("agno", "cod_depe"))
+      .select(col("agno"), (col("reprobated") / col("total_depe")).alias("depe_reprobation"))
 
-    joined_rural.coalesce(1).write.option("header", "true").option("delimiter",";").csv(out_path)
+    joined_rural.coalesce(1).write.option("header", "true").option("delimiter",";").csv(out_path+"/rural")
+    joined_depe.coalesce(1).write.option("header", "true").option("delimiter",";").csv(out_path+"/depe")
   }
 }
