@@ -1,9 +1,26 @@
 import matplotlib.pyplot as plt
 import pandas as pd
+import glob
+import seaborn as sns
+import os
+sns.set(style='ticks')
 
-df = pd.read_csv()
+path = os.path.abspath(os.getcwd())
+depe_path = glob.glob(path+"/out/reprobation/depe/*.csv")[0]
+rural_path = glob.glob(path+"/out/reprobation/rural/*.csv")[0]
 
-x = df['']
-y = df['']
+df = pd.read_csv(depe_path, sep=';')
+df['cod_depe'] = df['cod_depe'].astype('category')
+print(df.dtypes)
+ax = sns.lineplot(x="agno", y="depe_reprobation", hue="cod_depe", data=df)
+dependencies = ["Municipal", 
+                "Particular Subvencionado", 
+                "Particular Pagado (o no subvencionado)", 
+                "Corporación de Administración Delegada", 
+                "Servicio Local de Educación"]
+plt.show()
 
-plt.scatter(x,y)
+plt.figure()
+df = pd.read_csv(rural_path, sep=';')
+ax = sns.lineplot(x="agno", y="rural_reprobation", hue="rural_rbd", data=df)
+plt.show()
