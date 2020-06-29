@@ -36,7 +36,6 @@ case class Reprobation(){
     // Join with totals to get ration of reprobated students and total students
     val joined_rural = rep_rural.join(totals_rural, Seq("agno", "rural_rbd"))
       .select(col("agno"), col("rural_rbd"), (col("reprobated") / col("total_rural")).alias("rural_reprobation"))
-      .filter(col("rural_rbd") =!= "\"\"")
     val joined_depe = rep_depe.join(totals_depe, Seq("agno", "cod_depe"))
       .select(col("agno"), col("cod_depe"), (col("reprobated") / col("total_depe")).alias("depe_reprobation"))
 
