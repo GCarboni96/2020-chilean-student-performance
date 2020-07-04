@@ -19,6 +19,6 @@ object Driver {
       .getOrCreate()
 
     //YearlyAverage().run(spark, "out/yearly")
-    Reprobation().run(spark,"out/reprobation")
+    //Reprobation().run(spark,"out/reprobation")
   }
 }
