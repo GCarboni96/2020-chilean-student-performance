@@ -18,6 +18,10 @@ object Driver {
       .config(sparkConf)
       .getOrCreate()
 
+    //EvaluationYearlyAverage().run(spark, "out/evaluationyearly")
+    //EvaluationYearlyAverageRegion().run(spark, "out/evaluationyearlyreg")
+    //EvaluationAndPerformanceYearlyAverage().run(spark, "out/alumnosvsdocentes")
+    //Reprobation().run(spark,"out/reprobation")
     //YearlyAverage().run(spark, "out/yearly")
     //Reprobation().run(spark,"out/reprobation")
     PerformanceStats().run(spark)
