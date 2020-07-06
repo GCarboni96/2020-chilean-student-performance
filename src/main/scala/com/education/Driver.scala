@@ -20,7 +20,9 @@ object Driver {
 
     //EvaluationYearlyAverage().run(spark, "out/evaluationyearly")
     //EvaluationYearlyAverageRegion().run(spark, "out/evaluationyearlyreg")
-    EvaluationAndPerformanceYearlyAverage().run(spark, "out/alumnosvsdocentes")
+    //EvaluationAndPerformanceYearlyAverage().run(spark, "out/alumnosvsdocentes/establecimiento")
+    //EvaluationAndPerformanceYearlyAverageRegion().run(spark, "out/alumnosvsdocentes/regiones")
+    EvaluationAndPerformanceYearlyAverageMetroComuna().run(spark, "out/alumnosvsdocentes/comunasmetropolitana")
     //Reprobation().run(spark,"out/reprobation")
     //YearlyAverage().run(spark, "out/yearly")
   }
