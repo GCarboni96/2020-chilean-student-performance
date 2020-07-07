@@ -10,7 +10,7 @@ case class EvaluationYearlyAverage() {
   def run(spark:SparkSession, out_path:String) {
     val cols = List("año_eval", "rbd", "pf_pje", "nom_rbd")
     val picked = EvaluationDataset().pick_columns(spark, cols)
-    val filtered = picked.filter(picked("rbd") =!=" " || picked("pf_pje") =!= 1 || picked("pf_pje") =!=" ")
+    val filtered = picked.filter(picked("rbd").isNotNull || picked("pf_pje") =!= 1 || picked("pf_pje") =!=" ")
 
     val rdd = filtered.rdd
 
