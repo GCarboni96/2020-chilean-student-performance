@@ -27,5 +27,7 @@ object Driver {
     //YearlyAverage().run(spark, "out/yearly")
     //Reprobation().run(spark,"out/reprobation")
     //PerformanceStats().run(spark)
+    //PerformamnceYearlyAverageByGender().run(spark, "out/desempeño")
+    //PerformamnceYearlyAverageRegionByGender().run(spark, "out/desempeño")
   }
 }
