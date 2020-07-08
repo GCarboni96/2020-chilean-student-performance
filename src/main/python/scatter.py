@@ -6,7 +6,7 @@ import numpy as np
 # x = regiones (codigo_region)
 # y = promedio (avg_grades)
 
-df = pd.read_csv(r"D:\\Documentos_U\\2020-1\\Patos\\Proyecto\\chilean-student-performance\\chilean-student-performance\\out\\evaluationyearlyreg\\results.csv", sep = ';')
+df = pd.read_csv(r"D:\\Documentos_U\\2020-1\\Patos\\Proyecto\\chilean-student-performance\\chilean-student-performance\\out\\docentes\\establecimiento\\results.csv", sep = ';')
 
 
 

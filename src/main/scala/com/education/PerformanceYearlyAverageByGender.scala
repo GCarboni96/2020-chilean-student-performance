@@ -2,6 +2,7 @@ package com.education
 
 import org.apache.spark.sql.types._
 import org.apache.spark.sql.{Row, SparkSession}
+import org.apache.spark.sql.functions._
 
 
 // Promedio general de estudiantes de cada establecimiento por año, con promedio general
@@ -12,10 +13,10 @@ case class PerformanceYearlyAverageByGender() {
         // retrieve de data y seleccion de columnas 'cols'
         val picked = PerformanceDataset().pick_columns(spark, cols)
         // exclusion de registros sin datos de id_estb(rbd) o sin promedio gral de estudiantes Masculinos
-        val filteredMasc = picked.filter(picked("rbd") =!= " " || picked("prm_gral" =!= 0) || picked("gen_alu" === 1))
+        val filteredMasc = picked.filter(picked("rbd") =!= " " || picked("prom_gral") =!= 0 || picked("gen_alu") === 1)
         val rddMasc = filteredMasc.rdd
         // exclusion de registros sin datos de id_estb(rbd) o sin promedio gral de estudiantes Femeninos
-        val filteredFem = picked.filter(picked("rbd") =!= " " || picked("prm_gral" =!= 0) || picked("gen_alu" === 2))
+        val filteredFem = picked.filter(picked("rbd") =!= " " || picked("prom_gral") =!= 0 || picked("gen_alu") === 2)
         val rddFem = filteredFem.rdd
 
         // mapeo a ( (agno, rbd, nom_rbd), (prom_gral, varcontador) )
@@ -71,7 +72,7 @@ case class PerformanceYearlyAverageByGender() {
 
         // Haciendo Join de los resultados por genero
         val outJoined = outMasc.join(outFem, Seq("year", "rbd"), "inner")
-            .select(col("year"), col("rbd"), 
+            .select(col("year"), col("rbd"),
                     outFem.col("avg_grades_femenino"), outFem.col("avg_grades_rank_femenino"), 
                     outMasc.col("avg_grades_masculino"), outMasc.col("avg_grades_rank_masculino"))
         

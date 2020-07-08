@@ -6,17 +6,17 @@ import org.apache.spark.sql.functions._
 
 
 // Promedio general de estudiantes de cada region por año, con promedio general
-case class PerformanceYearlyAverageByGender() {
+case class PerformanceYearlyAverageRegionByGender() {
     def run(spark:SparkSession, out_path:String) {
         // selección de columnas año, cod_comuna, promedio_gral, genero_alum
         val cols = List("agno", "cod_com_rbd", "prom_gral", "gen_alu")
         // retrieve de data y seleccion de columnas 'cols'
         val picked = PerformanceDataset().pick_columns(spark, cols)
         // exclusion de registros sin datos de id_estb(rbd) o sin promedio gral de estudiantes Masculinos
-        val filteredMasc = picked.filter(picked("cod_com_rbd") =!= " " || picked("prm_gral" =!= 0) || picked("gen_alu" === 1))
+        val filteredMasc = picked.filter(picked("cod_com_rbd") =!= " " || picked("prom_gral") =!= 0 || picked("gen_alu") === 1)
         val rddMasc = filteredMasc.rdd
         // exclusion de registros sin datos de id_estb(rbd) o sin promedio gral de estudiantes Femeninos
-        val filteredFem = picked.filter(picked("cod_com_rbd") =!= " " || picked("prm_gral" =!= 0) || picked("gen_alu" === 2))
+        val filteredFem = picked.filter(picked("cod_com_rbd") =!= " " || picked("prom_gral") =!= 0 || picked("gen_alu") === 2)
         val rddFem = filteredFem.rdd
 
         // mapeo a ( (agno, cod_com_rbd), (prom_gral, varcontador) )
@@ -41,14 +41,14 @@ case class PerformanceYearlyAverageByGender() {
 
         // etiquetado segun promedio gral total
         val classedMasc = averagedMasc.map(t => Row(t._1, t._2, t._3,
-            if (t._4 < 2.0){"I"}
-            else if (t._4 >= 2.0 && t._4 < 2.5) {"B"}
-            else if (t._4 >= 2.5 && t._4 < 3.0) {"C"}
+            if (t._3 < 2.0){"I"}
+            else if (t._3 >= 2.0 && t._3 < 2.5) {"B"}
+            else if (t._3 >= 2.5 && t._3 < 3.0) {"C"}
             else {"D"} ))
         val classedFem = averagedFem.map(t => Row(t._1, t._2, t._3,
-            if (t._4 < 2.0){"I"}
-            else if (t._4 >= 2.0 && t._4 < 2.5) {"B"}
-            else if (t._4 >= 2.5 && t._4 < 3.0) {"C"}
+            if (t._3 < 2.0){"I"}
+            else if (t._3 >= 2.0 && t._3 < 2.5) {"B"}
+            else if (t._3 >= 2.5 && t._3 < 3.0) {"C"}
             else {"D"} ))
         // schemas de salida
         val schemaMasc = StructType(
