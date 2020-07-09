@@ -1,6 +1,5 @@
 package com.education
 
-import org.apache.spark.rdd
 import org.apache.spark.sql.SparkSession
 import org.apache.spark.sql.functions._
 
@@ -39,7 +38,8 @@ case class Reprobation(){
     val joined_depe = rep_depe.join(totals_depe, Seq("agno", "cod_depe"))
       .select(col("agno"), col("cod_depe"), (col("reprobated") / col("total_depe")).alias("depe_reprobation"))
 
-    joined_rural.coalesce(1).write.option("header", "true").option("delimiter",";").csv(out_path+"/rural")
+    joined_rural.filter(joined_rural("rural_rbd") === "1" or joined_rural("rural_rbd") === "0")
+      .coalesce(1).write.option("header", "true").option("delimiter",";").csv(out_path+"/rural")
     joined_depe.coalesce(1).write.option("header", "true").option("delimiter",";").csv(out_path+"/depe")
   }
 }
