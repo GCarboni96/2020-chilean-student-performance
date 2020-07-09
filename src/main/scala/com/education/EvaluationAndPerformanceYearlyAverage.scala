@@ -14,8 +14,16 @@ case class EvaluationAndPerformanceYearlyAverage() {
     // SACAMOS AÑO, ID_ESTB, NOMBRE_ESTB, AVG_GRADES PARA DOCENTES
     val cols = List("año_eval", "rbd", "pf_pje", "nom_rbd")
     val picked = EvaluationDataset().pick_columns(spark, cols)
-    val filtered = picked.filter(picked("rbd") =!=" " || picked("pf_pje") =!= 1 || picked("pf_pje") =!=" ")
-    val rdd = filtered.rdd
+    val filtered = picked.filter(picked("rbd") =!= "" || picked("pf_pje") =!= 1 || picked("pf_pje") =!=" ")
+    val filtered2 = filtered.na.replace(filtered.columns,Map(" " -> "9999"))
+    val filtered3 = filtered2.filter(filtered2("rbd") =!= "9999")
+    val filtered4 = filtered3.filter(filtered3("pf_pje") =!= "9999")
+    val filtered5 = filtered4.select(filtered4("año_eval").cast(IntegerType).as("año_eval"),
+      filtered4("rbd").cast(IntegerType).as("rbd"),
+      filtered4("pf_pje").cast(StringType).as("pf_pje"),
+      filtered4("nom_rbd").cast(StringType).as("nom_rbd"))
+
+    val rdd = filtered5.rdd
 
     val selected = rdd.map(t =>
       ((t.get(0), t.get(1), t.get(3)),
@@ -39,9 +47,9 @@ case class EvaluationAndPerformanceYearlyAverage() {
     // SACAMOS AÑO, ID_ESTB, NOMBRE_ESTB, AVG_GRADES, ASISTENCIA PARA ALUMNOS
 
     val cols2 = List("agno", "rbd", "nom_rbd", "prom_gral", "asistencia")
-    val picked2 = PerformanceDataset().pick_columns(spark, cols2)
-    val filtered2 = picked2.filter(picked2("prom_gral") =!= 0 || picked2("asistencia") =!= 0)
-    val rdd2 = filtered2.rdd
+    val picked2 = PerformanceDatasetForCross().pick_columns(spark, cols2)
+    val filtered10 = picked2.filter(picked2("prom_gral") =!= 0 || picked2("asistencia") =!= 0)
+    val rdd2 = filtered10.rdd
 
     val selected2 = rdd2.map(t =>
       ((t.get(0), t.get(1),t.get(2)),

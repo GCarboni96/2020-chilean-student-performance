@@ -3,7 +3,7 @@ package com.education
 import org.apache.spark.sql.SparkSession
 import org.apache.spark.sql.functions._
 
-case class Reprobation(){
+case class PerformanceReprobation(){
   def run(spark:SparkSession, out_path:String): Unit ={
     // Pick columns
     val cols = List("agno", "rural_rbd", "sit_fin", "sit_fin_r", "cod_depe", "cod_depe2")

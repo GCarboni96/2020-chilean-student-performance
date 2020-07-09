@@ -19,15 +19,17 @@ object Driver {
       .getOrCreate()
 
     //EvaluationYearlyAverage().run(spark, "out/docentes/establecimiento")
-    //EvaluationYearlyAverageRegion().run(spark, "out/evaluationyearlyreg")
+    //EvaluationYearlyAverageRegion().run(spark, "out/docentes/regiones")
+    //EvaluationYearlyAverageMetroComuna().run(spark, "out/docentes/comunasmetropolitana")
+    //PerformanceYearlyAverage().run(spark, "out/alumnos/establecimiento")
     //EvaluationAndPerformanceYearlyAverage().run(spark, "out/alumnosvsdocentes/establecimiento")
     //EvaluationAndPerformanceYearlyAverageRegion().run(spark, "out/alumnosvsdocentes/regiones")
     //EvaluationAndPerformanceYearlyAverageMetroComuna().run(spark, "out/alumnosvsdocentes/comunasmetropolitana")
     //Reprobation().run(spark,"out/reprobation")
     //YearlyAverage().run(spark, "out/yearly")
-    Reprobation().run(spark,"out/reprobation")
-    //PerformanceStats().run(spark, "out/stats")
-    //PerformamnceYearlyAverageByGender().run(spark, "out/desempeño")
-    //PerformamnceYearlyAverageRegionByGender().run(spark, "out/desempeño")
+    //Reprobation().run(spark,"out/reprobation")
+    //PerformanceStats().run(spark)
+    //PerformanceYearlyAverageByGender().run(spark, "out/alumnos/genero/establecimiento")
+    //PerformanceYearlyAverageRegionByGender().run(spark, "out/alumnos/genero/regiones")
   }
 }

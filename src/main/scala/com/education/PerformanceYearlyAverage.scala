@@ -4,7 +4,7 @@ import org.apache.spark.sql.types.{DoubleType, IntegerType, StructField, StructT
 import org.apache.spark.sql.{Row, SparkSession}
 
 //PROMEDIO GENERAL DE CADA ESTABLECIMIENTO POR AÑO, CON PROMEDIO GENERAL Y % DE ASISTENCIA
-case class YearlyAverage() {
+case class PerformanceYearlyAverage() {
   def run(spark:SparkSession, out_path:String) {
     val cols = List("agno", "rbd", "gen_alu", "prom_gral", "asistencia")
     val picked = PerformanceDataset().pick_columns(spark, cols)

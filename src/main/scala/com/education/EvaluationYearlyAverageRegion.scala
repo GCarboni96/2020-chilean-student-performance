@@ -11,8 +11,15 @@ case class EvaluationYearlyAverageRegion() {
     val cols = List("año_eval", "cod_reg_rbd", "pf_pje")
     val picked = EvaluationDataset().pick_columns(spark, cols)
     val filtered = picked.filter(picked("cod_reg_rbd") =!=" " || picked("pf_pje") =!= 1 || picked("pf_pje") =!=" ")
+    val filtered2 = filtered.na.replace(filtered.columns,Map(" " -> "9999"))
+    val filtered3 = filtered2.filter(filtered2("cod_reg_rbd") =!= "9999")
+    val filtered4 = filtered3.filter(filtered3("pf_pje") =!= "9999")
+    val filtered5 = filtered4.select(filtered4("año_eval").cast(IntegerType).as("año_eval"),
+      filtered4("cod_reg_rbd").cast(IntegerType).as("cod_reg_rbd"),
+      filtered4("pf_pje").cast(StringType).as("pf_pje")
+    )
 
-    val rdd = filtered.rdd
+    val rdd = filtered5.rdd
 
     val selected = rdd.map(t =>
       ((t.get(0), t.get(1)),
