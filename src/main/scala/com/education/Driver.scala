@@ -18,8 +18,10 @@ object Driver {
       .config(sparkConf)
       .getOrCreate()
 
-    EvaluationYearlyAverage().run(spark, "out/docentes/establecimiento")
-    //EvaluationYearlyAverageRegion().run(spark, "out/evaluationyearlyreg")
+    //EvaluationYearlyAverage().run(spark, "out/docentes/establecimiento")
+    //EvaluationYearlyAverageRegion().run(spark, "out/docentes/regiones")
+    //EvaluationYearlyAverageMetroComuna().run(spark, "out/docentes/comunasmetropolitana")
+    //PerformanceYearlyAverage().run(spark, "out/alumnos/establecimiento")
     //EvaluationAndPerformanceYearlyAverage().run(spark, "out/alumnosvsdocentes/establecimiento")
     //EvaluationAndPerformanceYearlyAverageRegion().run(spark, "out/alumnosvsdocentes/regiones")
     //EvaluationAndPerformanceYearlyAverageMetroComuna().run(spark, "out/alumnosvsdocentes/comunasmetropolitana")

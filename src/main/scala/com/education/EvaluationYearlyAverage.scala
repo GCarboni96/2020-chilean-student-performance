@@ -11,20 +11,13 @@ case class EvaluationYearlyAverage() {
     val cols = List("año_eval", "rbd", "pf_pje", "nom_rbd")
     val picked = EvaluationDataset().pick_columns(spark, cols)
     val filtered = picked.filter(picked("rbd") =!= "" || picked("pf_pje") =!= 1 || picked("pf_pje") =!=" ")
-    filtered.show()
     val filtered2 = filtered.na.replace(filtered.columns,Map(" " -> "9999"))
-    filtered2.show()
     val filtered3 = filtered2.filter(filtered2("rbd") =!= "9999")
     val filtered4 = filtered3.filter(filtered3("pf_pje") =!= "9999")
-    filtered4.show()
-
     val filtered5 = filtered4.select(filtered4("año_eval").cast(IntegerType).as("año_eval"),
       filtered4("rbd").cast(IntegerType).as("rbd"),
       filtered4("pf_pje").cast(StringType).as("pf_pje"),
       filtered4("nom_rbd").cast(StringType).as("nom_rbd"))
-
-    filtered5.show()
-
 
     val rdd = filtered5.rdd
 

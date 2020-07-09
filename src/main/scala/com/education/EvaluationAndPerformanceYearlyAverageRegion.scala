@@ -38,7 +38,7 @@ case class EvaluationAndPerformanceYearlyAverageRegion() {
     // SACAMOS AÑO, ID_ESTB, NOMBRE_ESTB, AVG_GRADES, ASISTENCIA PARA ALUMNOS
 
     val cols2 = List("agno", "cod_reg_rbd", "prom_gral", "asistencia")
-    val picked2 = PerformanceDataset().pick_columns(spark, cols2)
+    val picked2 = PerformanceDatasetForCross().pick_columns(spark, cols2)
     val filtered2 = picked2.filter(picked2("prom_gral") =!= 0 || picked2("asistencia") =!= 0)
     val rdd2 = filtered2.rdd
 
@@ -68,6 +68,8 @@ case class EvaluationAndPerformanceYearlyAverageRegion() {
 
     val joined= out_docentes.join(out_alumnos,Seq("year", "region"), "inner")
       .select(col("year"), col("region"), out_docentes.col("avg_grades_docentes") ,out_alumnos.col("avg_grades_alumnos"))
+
+
     joined.coalesce(1).write.option("header", "true").option("delimiter",";").csv(out_path)
   }
 }

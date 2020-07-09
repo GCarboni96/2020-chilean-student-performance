@@ -39,7 +39,7 @@ case class EvaluationAndPerformanceYearlyAverageMetroComuna() {
     // SACAMOS AÑO, ID_ESTB, NOMBRE_ESTB, AVG_GRADES, ASISTENCIA PARA ALUMNOS
 
     val cols2 = List("agno", "cod_reg_rbd", "cod_com_rbd", "nom_com_rbd","prom_gral", "asistencia")
-    val picked2 = PerformanceDataset().pick_columns(spark, cols2)
+    val picked2 = PerformanceDatasetForCross().pick_columns(spark, cols2)
     val filtered2 = picked2.filter((picked2("prom_gral") =!= 0 || picked2("asistencia") =!= 0)&& (picked2("cod_reg_rbd") ===13))
     val rdd2 = filtered2.rdd
 
