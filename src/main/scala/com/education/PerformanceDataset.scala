@@ -10,10 +10,11 @@ case class PerformanceDataset(){
   def hasColumn(df: DataFrame, path: String): Boolean = Try(df(path)).isSuccess
 
   def pick_columns(spark: SparkSession, cols: List[String]): DataFrame = {
-    val dfs = new Array[DataFrame](2018 - 2003 + 1)
+    val dfs = new Array[DataFrame](2019 - 2002 + 1)
 
-    for (i <- 2003 to 2018) {
-      val path = s"D:\\Documentos_U\\2020-1\\Patos\\Proyecto\\chilean-student-performance\\src\\main\\resources\\performance\\performance_$i.csv"
+
+    for (i <- 2002 to 2019) {
+      val path = s".\\src\\main\\resources\\performance\\performance_$i.csv"
       var df = spark.read.format("csv")
         .option("header", "true").option("inferschema", "true")
         .option("sep", ";")
@@ -26,7 +27,7 @@ case class PerformanceDataset(){
       }
 
       val picked = df.select(cols.map(col): _*)
-      dfs(i - 2003) = picked
+      dfs(i - 2002) = picked
     }
 
     val total = dfs.reduce(_ union _)

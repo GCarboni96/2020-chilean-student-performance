@@ -5,9 +5,8 @@ import seaborn as sns
 import os
 sns.set(style='ticks')
 
-path = os.path.abspath(os.getcwd())
-depe_path = glob.glob(path+"/out/reprobation/depe/*.csv")[0]
-rural_path = glob.glob(path+"/out/reprobation/rural/*.csv")[0]
+depe_path = glob.glob("../../../out/reprobation/depe/*.csv")[0]
+rural_path = glob.glob("../../../out/reprobation/rural/*.csv")[0]
 
 df = pd.read_csv(depe_path, sep=';')
 df['cod_depe'] = df['cod_depe'].astype('category')
