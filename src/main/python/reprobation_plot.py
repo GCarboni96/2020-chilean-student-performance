@@ -18,7 +18,7 @@ color = ["#5C5CC4", "#E7478D", "#90C4FE", "#1BBC9D", "#FFDB4C"]
 fig = plt.figure(figsize=(10, 7))
 fig.set_facecolor('#F5FBFB')
 
-ax = sns.lineplot(x="agno", y="depe_reprobation", palette = color, hue="cod_depe", data=df, linewidth=2)
+ax = sns.lineplot(x="agno", y="depe_reprobation", palette=color, hue="cod_depe", data=df, linewidth=2)
 ax.set_facecolor('#F5FBFB')
 ax.yaxis.set_major_formatter(mtick.PercentFormatter(1.0))
 
@@ -43,21 +43,27 @@ plt.xlim([2002, 2019])
 plt.xlabel("Año")
 plt.ylabel("Tasa de reprobación")
 
-#Rural
-fig = plt.figure()
+# Rural
+fig = plt.figure(figsize=(10,7))
 fig.set_facecolor('#F5FBFB')
 df = pd.read_csv(rural_path, sep=';')
 
 color = ["#5C5CC4", "#E7478D"]
 
-ax = sns.lineplot(x="agno", y="rural_reprobation", hue="rural_rbd", data=df, palette=color)
+ax = sns.lineplot(x="agno", y="rural_reprobation", hue="rural_rbd", data=df, palette=color, linewidth=2)
 ax.set_facecolor('#F5FBFB')
 ax.yaxis.set_major_formatter(mtick.PercentFormatter(1.0))
 handles, labels = ax.get_legend_handles_labels()
 L = ax.legend(handles=handles[1:], labels=labels[1:])
+
+for line in L.get_lines():
+    line.set_linewidth(3.0)
+
 legends = ["Urbano", "Rural"]
 for i in range(2):
     L.get_texts()[i].set_text(legends[i])
+
+
 
 plt.xticks(range(2002, 2020, 2))
 plt.xlim([2002, 2019])
