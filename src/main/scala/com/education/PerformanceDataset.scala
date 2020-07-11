@@ -13,7 +13,7 @@ case class PerformanceDataset(){
     val dfs = new Array[DataFrame](2019 - 2002 + 1)
 
 
-    for (i <- 2002 to 2019) {
+    for (i <- 2003 to 2018) {
       val path = s".\\src\\main\\resources\\performance\\performance_$i.csv"
       var df = spark.read.format("csv")
         .option("header", "true").option("inferschema", "true")
