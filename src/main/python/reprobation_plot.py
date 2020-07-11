@@ -2,7 +2,7 @@ import matplotlib.pyplot as plt
 import pandas as pd
 import glob
 import seaborn as sns
-import os
+
 sns.set(style='ticks')
 
 depe_path = glob.glob("../../../out/reprobation/depe/*.csv")[0]
