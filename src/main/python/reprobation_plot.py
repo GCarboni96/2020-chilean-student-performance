@@ -9,6 +9,7 @@ sns.set(style='ticks')
 depe_path = glob.glob("../../../out/reprobation/depe/*.csv")[0]
 rural_path = glob.glob("../../../out/reprobation/rural/*.csv")[0]
 
+# Dependencias
 df = pd.read_csv(depe_path, sep=';')
 df['cod_depe'] = df['cod_depe'].astype('category')
 
@@ -29,9 +30,9 @@ for line in L.get_lines():
 
 legends = ["Municipal",
            "Particular\nSubvencionado",
-           "Particular\n Pagado",
-           "Corporación de \n Administración \n Delegada",
-           "Servicio Local \n de Educación"]
+           "Particular\nPagado",
+           "Corporación de\nAdministración\nDelegada",
+           "Servicio Local\nde Educación"]
 
 for i in range(5):
     L.get_texts()[i].set_text(legends[i])
@@ -42,15 +43,15 @@ plt.xlim([2002, 2019])
 plt.xlabel("Año")
 plt.ylabel("Tasa de reprobación")
 
-########################################
-
-
-plt.figure()
+#Rural
+fig = plt.figure()
+fig.set_facecolor('#F5FBFB')
 df = pd.read_csv(rural_path, sep=';')
 
 color = ["#5C5CC4", "#E7478D"]
 
 ax = sns.lineplot(x="agno", y="rural_reprobation", hue="rural_rbd", data=df, palette=color)
+ax.set_facecolor('#F5FBFB')
 ax.yaxis.set_major_formatter(mtick.PercentFormatter(1.0))
 handles, labels = ax.get_legend_handles_labels()
 L = ax.legend(handles=handles[1:], labels=labels[1:])

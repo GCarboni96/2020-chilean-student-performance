@@ -1,10 +1,7 @@
 package com.education
 
-import org.apache.hadoop.fs.{FileSystem, Path}
 import org.apache.spark.SparkConf
-import org.apache.spark.sql.{DataFrame, SparkSession}
-import org.apache.spark.sql.functions.{col, lit}
-import org.apache.spark.sql.types.StringType
+import org.apache.spark.sql.SparkSession
 
 object Driver {
   def main(args: Array[String]) {
@@ -20,8 +17,8 @@ object Driver {
 
     //EvaluationYearlyAverage().run(spark, "out/docentes/establecimiento")
     //EvaluationYearlyAverageCount().run(spark, "out/docentes/count/establecimiento")
-    EvaluationYearlyAverageRegion().run(spark, "out/docentes/regiones")
-    EvaluationYearlyAverageMetroComuna().run(spark, "out/docentes/comunasmetropolitana")
+    //EvaluationYearlyAverageRegion().run(spark, "out/docentes/regiones")
+    //EvaluationYearlyAverageMetroComuna().run(spark, "out/docentes/comunasmetropolitana")
     //PerformanceYearlyAverage().run(spark, "out/alumnos/establecimiento")
     //PerformanceYearlyAverageByYear().run(spark, "out/alumnos/anual")
     //EvaluationAndPerformanceYearlyAverage().run(spark, "out/alumnosvsdocentes/establecimiento")
@@ -30,7 +27,7 @@ object Driver {
     //Reprobation().run(spark,"out/reprobation")
     //YearlyAverage().run(spark, "out/yearly")
     //Reprobation().run(spark,"out/reprobation")
-    //PerformanceStats().run(spark)
+    PerformanceStats().run(spark, "out/stats")
     //PerformanceYearlyAverageByGender().run(spark, "out/alumnos/genero/establecimiento")
     //PerformanceYearlyAverageRegionByGender().run(spark, "out/alumnos/genero/regiones")
   }
