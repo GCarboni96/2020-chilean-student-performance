@@ -39,7 +39,8 @@ cat_5 = df[df['year']==2017]
 
 cat_6 = df[df['year']==2018]
 
-sns.set(style="darkgrid")
+sns.set(style='ticks')
+
 
 ax = sns.countplot(x="year", hue="calificacion" ,data=df)
 

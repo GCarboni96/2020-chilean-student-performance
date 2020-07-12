@@ -42,7 +42,7 @@ cat_6 = df[df['year']==2018]
 
 
 
-for i in range(2016,2019):
+for i in range(2018,2019):
     X = df[df['year']==i]['avg_grades']
     #X = X + np.random.normal(size=X.shape)*0.07
     Y = df[df['year']==i]['avg_assistance']
@@ -53,8 +53,8 @@ plt.xlim([1,7])
 plt.ylim([1,100])
 plt.xlabel("Promedio Final Alumnos")
 plt.ylabel("Asistencia")
-plt.title("Rendimientos alumnos y su asistencia por establecimiento (2016-2018)")
-plt.legend(['2016','2017','2018'
+plt.title("Rendimientos alumnos y su asistencia por establecimiento (2018)")
+plt.legend(['2018'
             ], framealpha=0.5)
 
 

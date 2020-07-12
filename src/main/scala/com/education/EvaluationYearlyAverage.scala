@@ -32,8 +32,7 @@ case class EvaluationYearlyAverage() {
     val classed = averaged.map(t=> Row(t._1,t._2, t._3, t._4,
     if (t._4 < 2.0){"I"}
     else if (t._4 >= 2.0 && t._4 < 2.5) {"B"}
-    else if (t._4 >= 2.5 && t._4 < 3.0) {"C"}
-    else {"D"}
+    else {"C"}
     ))
     val schema = StructType(
       List(

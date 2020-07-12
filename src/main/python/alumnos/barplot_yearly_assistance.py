@@ -44,11 +44,11 @@ X = df['year']
 #X = X + np.random.normal(size=X.shape)*0.07
 Y = df['avg_assistance']
 #Y = Y + np.random.normal(size=X.shape)*0.03
-plt.bar(X, Y, width=0.8, bottom=None, align='center', data=None)
+plt.bar(X, Y, width=0.8, bottom=None, align='center', data=None, color= ([84/255, 88/255, 255/255]))
 
 
 plt.xlim([2002,2019])
-plt.ylim([50,100])
+plt.ylim([70,100])
 plt.xlabel("Años")
 plt.ylabel("Asistencia")
 plt.title("Asistencia alumnos por año (2003-2018)")

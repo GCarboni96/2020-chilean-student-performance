@@ -70,6 +70,9 @@ case class EvaluationAndPerformanceYearlyAverageRegion() {
       .select(col("year"), col("region"), out_docentes.col("avg_grades_docentes") ,out_alumnos.col("avg_grades_alumnos"))
 
 
-    joined.coalesce(1).write.option("header", "true").option("delimiter",";").csv(out_path)
+    val sorted = joined.sort(asc("year"), asc("region"))
+
+
+    sorted.coalesce(1).write.option("header", "true").option("delimiter",";").csv(out_path)
   }
 }
