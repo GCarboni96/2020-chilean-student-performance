@@ -1,4 +1,5 @@
 import matplotlib.pyplot as plt
+import matplotlib.ticker as mtick
 import pandas as pd
 import glob
 import seaborn as sns
@@ -8,18 +9,64 @@ sns.set(style='ticks')
 depe_path = glob.glob("../../../out/reprobation/depe/*.csv")[0]
 rural_path = glob.glob("../../../out/reprobation/rural/*.csv")[0]
 
+# Dependencias
 df = pd.read_csv(depe_path, sep=';')
 df['cod_depe'] = df['cod_depe'].astype('category')
-print(df.dtypes)
-ax = sns.lineplot(x="agno", y="depe_reprobation", hue="cod_depe", data=df)
-dependencies = ["Municipal", 
-                "Particular Subvencionado", 
-                "Particular Pagado (o no subvencionado)", 
-                "Corporación de Administración Delegada", 
-                "Servicio Local de Educación"]
-plt.show()
 
-plt.figure()
+color = ["#5C5CC4", "#E7478D", "#90C4FE", "#1BBC9D", "#FFDB4C"]
+
+fig = plt.figure(figsize=(10, 7))
+fig.set_facecolor('#F5FBFB')
+
+ax = sns.lineplot(x="agno", y="depe_reprobation", palette=color, hue="cod_depe", data=df, linewidth=2)
+ax.set_facecolor('#F5FBFB')
+ax.yaxis.set_major_formatter(mtick.PercentFormatter(1.0))
+
+handles, labels = ax.get_legend_handles_labels()
+L = ax.legend(handles=handles[1:], labels=labels[1:])
+
+for line in L.get_lines():
+    line.set_linewidth(3.0)
+
+legends = ["Municipal",
+           "Particular\nSubvencionado",
+           "Particular\nPagado",
+           "Corporación de\nAdministración\nDelegada",
+           "Servicio Local\nde Educación"]
+
+for i in range(5):
+    L.get_texts()[i].set_text(legends[i])
+
+box = ax.get_position()
+plt.xticks(range(2002, 2020, 2))
+plt.xlim([2002, 2019])
+plt.xlabel("Año")
+plt.ylabel("Tasa de reprobación")
+
+# Rural
+fig = plt.figure(figsize=(10,7))
+fig.set_facecolor('#F5FBFB')
 df = pd.read_csv(rural_path, sep=';')
-ax = sns.lineplot(x="agno", y="rural_reprobation", hue="rural_rbd", data=df)
+
+color = ["#5C5CC4", "#E7478D"]
+
+ax = sns.lineplot(x="agno", y="rural_reprobation", hue="rural_rbd", data=df, palette=color, linewidth=2)
+ax.set_facecolor('#F5FBFB')
+ax.yaxis.set_major_formatter(mtick.PercentFormatter(1.0))
+handles, labels = ax.get_legend_handles_labels()
+L = ax.legend(handles=handles[1:], labels=labels[1:])
+
+for line in L.get_lines():
+    line.set_linewidth(3.0)
+
+legends = ["Urbano", "Rural"]
+for i in range(2):
+    L.get_texts()[i].set_text(legends[i])
+
+
+
+plt.xticks(range(2002, 2020, 2))
+plt.xlim([2002, 2019])
+plt.xlabel("Año")
+plt.ylabel("Tasa de reprobación")
 plt.show()
