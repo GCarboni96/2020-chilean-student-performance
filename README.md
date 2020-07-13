@@ -18,9 +18,9 @@ We use two datasets from the Ministry of Education of the Government of Chile: A
 
 |     | Academic performance | Professor evaluation |
 |-----|----------|--------------|
-| Attributes  | 42       | 39           |
-| Number of registers  | 57.950.225 | 106.650           |
-| Size in bytes | 7.45 GB      | 115 MB           |
+| Attributes | 42 | 39 |
+| Number of registers | 57.950.225 | 106.650 |
+| Size in bytes | 7.45 GB | 115 MB |
 
 ## Methods
 
