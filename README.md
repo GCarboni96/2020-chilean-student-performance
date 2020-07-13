@@ -11,7 +11,9 @@ The goal of the project is to explore and analyze two datasets that are closely 
 ## Dataset
 
 We use two datasets from the Ministry of Education of the Government of Chile: Academic Performance and Professor Evaluation. These can be found on the following links:
+
 +[Academic Performance](http://datos.mineduc.cl/dashboards/19881/rendimiento-academico-por-estudiantes/).
+
 +[Professor Evaluation](http://datos.mineduc.cl/dashboards/19754/bases-de-datos-de-evaluacion-docente/).
 
 ## Methods
