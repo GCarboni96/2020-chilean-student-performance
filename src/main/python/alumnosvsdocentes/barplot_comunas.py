@@ -61,7 +61,7 @@ x = np.arange(32)
 
 width = 0.2
 
-m=df[df['year']==2016]
+m=df[df['year']==2013]
 
 #ax.bar(x - width/2, df[df['year']==2017]['avg_grades_alumnos'], color=([255/255, 109/255, 197/255]),width= width)
 # set x-axis label
@@ -85,7 +85,7 @@ plt.xlabel("Comunas")
 plt.xlim([-1,32])
 ax.set_xticks(x)
 ax.set_xticklabels(labels)
-plt.title("Rendimiento alumnos y docentes por comunas de Santiago (2016)")
+plt.title("Rendimiento alumnos y docentes por comunas de Santiago (2013)")
 
 plt.show()
 # save the plot as a file

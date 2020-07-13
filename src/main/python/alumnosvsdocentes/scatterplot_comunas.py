@@ -48,10 +48,10 @@ colormap = np.array(['r', 'g', 'b'])
 colors = cm.rainbow(np.linspace(0, 1, 15))
 
 for i in range(13101,13133):
-    X = df[df['cod_comuna']==i][df['year']==2013]['avg_grades_docentes']
+    X = df[df['cod_comuna']==i][df['year']==2017]['avg_grades_docentes']
 
     #X = X + np.random.normal(size=X.shape)*0.07
-    Y = df[df['cod_comuna']==i][df['year']==2013]['avg_grades_alumnos']
+    Y = df[df['cod_comuna']==i][df['year']==2017]['avg_grades_alumnos']
     #Y = Y + np.random.normal(size=X.shape)*0.03
     if (i == 13113 or i == 13114 or i == 13115 or i == 13123 or i == 13132):
         color = "r"
@@ -66,7 +66,7 @@ plt.xlim([2,3])
 plt.ylim([5,6.5])
 plt.xlabel("Promedio Docentes")
 plt.ylabel("Promedio Alumnos")
-plt.title("Rendimientos alumnos y docentes por comunas de santiago (2013)")
+plt.title("Rendimientos alumnos y docentes por comunas de santiago (2017)")
 plt.legend(['Santiago','Cerrillos','Cerro Navia','Conchali','El Bosque','E. Central','Huechuraba','Indepen.','La Cisterna','La Florida','La Granja','La Pintana','La Reina', 'Las Condes','Lo Barnechea','Lo Espejo','Lo Prado','Macul','Maipú','Ñuñoa','P.A.C','Peñalolen','Providencia','Pudahuel','Quilicura','Q. Normal','Recoleta','Renca', 'San Joaquín','San Miguel','San Ramon','Vitacura']
             , framealpha=1)
 
