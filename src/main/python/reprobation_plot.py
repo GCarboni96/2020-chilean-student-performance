@@ -42,6 +42,7 @@ plt.xticks(range(2002, 2020, 2))
 plt.xlim([2002, 2019])
 plt.xlabel("Año")
 plt.ylabel("Tasa de reprobación")
+plt.title("Reprobación anual según dependencia")
 
 # Rural
 fig = plt.figure(figsize=(10,7))
@@ -63,10 +64,9 @@ legends = ["Urbano", "Rural"]
 for i in range(2):
     L.get_texts()[i].set_text(legends[i])
 
-
-
 plt.xticks(range(2002, 2020, 2))
 plt.xlim([2002, 2019])
 plt.xlabel("Año")
 plt.ylabel("Tasa de reprobación")
+plt.title("Reprobación anual según tipo de localidad")
 plt.show()

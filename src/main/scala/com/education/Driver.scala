@@ -27,7 +27,8 @@ object Driver {
     //Reprobation().run(spark,"out/reprobation")
     //YearlyAverage().run(spark, "out/yearly")
     //Reprobation().run(spark,"out/reprobation")
-    PerformanceStats().run(spark, "out/stats")
+    //PerformanceStats().run(spark, "out/stats/performance")
+    EvaluationStats().run(spark, "out/stats/evaluation")
     //PerformanceYearlyAverageByGender().run(spark, "out/alumnos/genero/establecimiento")
     //PerformanceYearlyAverageRegionByGender().run(spark, "out/alumnos/genero/regiones")
   }
