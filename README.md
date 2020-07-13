@@ -16,6 +16,12 @@ We use two datasets from the Ministry of Education of the Government of Chile: A
 
 + [Professor Evaluation](http://datos.mineduc.cl/dashboards/19754/bases-de-datos-de-evaluacion-docente/).
 
+|     | Academic performance | Professor evaluation |
+|-----|----------|--------------|
+| Attributes  | 42       | 39           |
+| Number of registers  | 57.950.225 | 106.650           |
+| Size in bytes | 7.45 GB      | 115 MB           |
+
 ## Methods
 
 Both datasets were proccesed using the analytis engine Apache Spark. Specifically, we built our project using Apache Maven and programmed the queries with the language Scala.
