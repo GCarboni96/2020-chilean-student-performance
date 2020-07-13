@@ -13,13 +13,21 @@ case class EvaluationDataset(){
     val dfs = new Array[DataFrame](2018 - 2013 + 1)
 
     for (i <- 2013 to 2018) {
-      val path = s"D:\\Documentos_U\\2020-1\\Patos\\Proyecto\\chilean-student-performance\\src\\main\\resources\\evaluation\\evaluation$i.csv"
-
-      var df = spark.read.format("csv")
-        .option("header", "true").option("inferschema", "true")
-        .option("sep", ";")
-        .load(path)
-
+      val path = s".\\src\\main\\resources\\evaluation\\evaluation$i.csv"
+      var df: DataFrame = null
+      if (i < 2016){
+        df = spark.read.format("csv")
+          .option("header", "true").option("inferschema", "true")
+          .option("encoding", "windows-1252")
+          .option("sep", ";")
+          .load(path)
+      }
+      else {
+        df = spark.read.format("csv")
+          .option("header", "true").option("inferschema", "true")
+          .option("sep", ";")
+          .load(path)
+      }
       for (name <- cols) {
         if (!hasColumn(df, name)) {
           df = df.withColumn(name, lit(null).cast(StringType))
