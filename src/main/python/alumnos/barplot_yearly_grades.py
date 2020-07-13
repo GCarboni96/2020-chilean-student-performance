@@ -44,11 +44,11 @@ X = df['year']
 #X = X + np.random.normal(size=X.shape)*0.07
 Y = df['avg_grades']
 #Y = Y + np.random.normal(size=X.shape)*0.03
-plt.bar(X, Y, width=0.8, bottom=None, align='center', data=None)
+plt.bar(X, Y, width=0.8, bottom=None, align='center', data=None, color =([255/255, 109/255, 197/255]))
 
 
 plt.xlim([2002,2019])
-plt.ylim([1,7])
+plt.ylim([5,7])
 plt.xlabel("Años")
 plt.ylabel("Promedio Final Alumnos")
 plt.title("Rendimientos alumnos por año (2003-2018)")

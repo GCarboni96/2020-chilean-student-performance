@@ -66,6 +66,8 @@ case class EvaluationAndPerformanceYearlyAverageMetroComuna() {
     //HACEMOS JOIN
     val joined= out_docentes.join(out_alumnos,Seq("year", "cod_comuna"), "inner")
       .select(col("year"), col("cod_comuna"), out_docentes.col("nomb_comuna"),out_docentes.col("avg_grades_docentes") ,out_alumnos.col("avg_grades_alumnos"))
-    joined.coalesce(1).write.option("header", "true").option("delimiter",";").csv(out_path)
+
+    val sorted = joined.sort(asc("year"), asc("cod_comuna"))
+    sorted.coalesce(1).write.option("header", "true").option("delimiter",";").csv(out_path)
   }
 }
