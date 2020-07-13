@@ -40,7 +40,13 @@ cat_5 = df[df['year']==2017]
 cat_6 = df[df['year']==2018]
 
 sns.set(style='ticks')
-ax = sns.countplot(x="year", hue="calificacion" ,data=df)
+
+
+
+color = ["#5C5CC4", "#E7478D", "#90C4FE", "#1BBC9D", "#FFBB4C"]
+
+ax = sns.countplot(x="year", hue="calificacion" ,data=df,palette=color)
+
 
 plt.show()
 
