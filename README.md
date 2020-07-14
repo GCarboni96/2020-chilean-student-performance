@@ -41,9 +41,35 @@ Finally, we studied our results by making graphs via Matplotlib and Seaborn, Pyt
 
 ## Results
 
+![Rendimiento alumnos por año](https://i.imgur.com/vtTY2E9.png)
+
+![Asistencia alumnos por año](https://i.imgur.com/xiHuQRE.png)
+
+![Rendimiento alumnos por año](https://i.imgur.com/vtTY2E9.png)
+
+![Rendimiento alumnos por año](https://i.imgur.com/vtTY2E9.png)
+
+![Rendimiento alumnos por año](https://i.imgur.com/vtTY2E9.png)
+
 
 
 ## Conclusion
+
+1. se puede ver que la tasa de reprobacion baja a partir del año 2010-2012, y el efecto de la revolcion pinguina y movilizacion estuaintil 2006 y 2011
+
+2. se nota la mayor reprobacion en los urbanos a partir del 2009 y como el movimiento no afecta a los rurales
+
+3. se concentra en 80-100 asistencia y 5-6.5 de promedio. esta conecntracion es esperada
+
+4. la asistencia no presenta tantas bajas ni subidas (2011 es bajisima)
+
+5. en general esta sube a lo largo de los años
+
+6 y 7, se nota que como en los años 2016 y 2017 los profes aumentan su rendimiento, y por alguna razon esta baja el 2018
+
+8. el promedio de los alumnos no cambia mucho a lo largo de las regiones. el de los docentes tambien es homogeneo pero no tanto
+
+9. en general se puede apreciar que en santiago hay un amuento tantp de los profesores como de los alumnos. y los outliers mantienen su jerarquia frente a las demas comunas.
 
 ## Contributors
 
