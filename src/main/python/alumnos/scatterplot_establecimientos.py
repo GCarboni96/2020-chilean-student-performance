@@ -54,8 +54,6 @@ plt.ylim([1,100])
 plt.xlabel("Promedio Final Alumnos")
 plt.ylabel("Asistencia")
 plt.title("Rendimientos alumnos y su asistencia por establecimiento (2018)")
-plt.legend(['2018'
-            ], framealpha=0.5)
 
 
 plt.show()

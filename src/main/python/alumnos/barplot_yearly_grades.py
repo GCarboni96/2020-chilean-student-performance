@@ -44,6 +44,7 @@ X = df['year']
 #X = X + np.random.normal(size=X.shape)*0.07
 Y = df['avg_grades']
 #Y = Y + np.random.normal(size=X.shape)*0.03
+plt.xticks(range(2002, 2020, 2))
 plt.bar(X, Y, width=0.8, bottom=None, align='center', data=None, color =([255/255, 109/255, 197/255]))
 
 
