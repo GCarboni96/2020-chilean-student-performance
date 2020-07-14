@@ -73,13 +73,13 @@ plt.title("Rendimientos alumnos y evaluación docentes en Santiago (2013 y 2017)
 
 custom_lines = [Line2D([0], [0], marker='P', color='w', label='Scatter',
                        markerfacecolor='gray', markersize=10),
-                Line2D([0], [0], marker='^', color='w', label='Scatter',
+                Line2D([0], [0], marker='X', color='w', label='Scatter',
                        markerfacecolor='gray', markersize=10),
                 Line2D([0], [0], marker='D', color='w', label='Scatter',
                        markerfacecolor='gray', markersize=10),
                 Line2D([0], [0], marker='s', color='w', label='Scatter',
                        markerfacecolor='gray', markersize=10),
-                Line2D([0], [0], marker='X', color='w', label='Scatter',
+                Line2D([0], [0], marker='^', color='w', label='Scatter',
                        markerfacecolor='gray', markersize=10),
                 Line2D([0], [0], marker='o', color='w', label='Scatter',
                     markerfacecolor='gray', markersize=10)]
@@ -87,14 +87,8 @@ custom_lines = [Line2D([0], [0], marker='P', color='w', label='Scatter',
 custom_lines2 = [Line2D([0], [0], marker='o', markerfacecolor="#5C5CC4", color='w', lw=4, markersize=10),
                  Line2D([0], [0], marker='o', markerfacecolor="#E7478D", color='w', lw=4, markersize=10)]
 
-#octagono vitacura
-#triangulo barnechea
-#diamente las condes
-#signo mas la reina
-#x providencia
-
-
 ax = plt.gca()
+ax.set_facecolor('#F5FBFB')
 legend1 = ax.legend(custom_lines, ['La Reina', 'Providencia', 'Las Condes',
                          'Vitacura', 'Lo Barnechea', 'Resto de Santiago'])
 
