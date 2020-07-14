@@ -47,6 +47,7 @@ plt.xlim([2002, 2019])
 plt.xlabel("Año")
 plt.ylabel("Tasa de reprobación")
 plt.title("Reprobación anual según dependencia")
+plt.savefig("../../../graphs/reprobacion anual segun dependencia.png")
 
 # Rural
 fig = plt.figure(figsize=(10,7))
@@ -77,4 +78,5 @@ plt.xlim([2002, 2019])
 plt.xlabel("Año")
 plt.ylabel("Tasa de reprobación")
 plt.title("Reprobación anual según tipo de localidad")
+plt.savefig("../../../graphs/reprobacion anual segun tipo de localidad.png")
 plt.show()
