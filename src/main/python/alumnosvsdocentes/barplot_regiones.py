@@ -53,12 +53,13 @@ labels =['I','II','III','IV','V','VI','VII','VIII','IX','X','XI','XII','RM', 'XI
 x = np.arange(15)
 
 fig, ax = plt.subplots()
+plt.rcParams.update({'font.size': 14})
 
-
+fig.set_facecolor('#F5FBFB')
 
 width = 0.35
 
-m=df[df['year']==2016]
+m=df[df['year']==2017]
 
 m.avg_grades_alumnos.plot(kind='bar', color=([255/255, 109/255, 197/255]), ax=ax, width=width, position=1)
 
@@ -68,7 +69,7 @@ m.avg_grades_alumnos.plot(kind='bar', color=([255/255, 109/255, 197/255]), ax=ax
 # set x-axis label
 ax.set_xlabel("Regiones",fontsize=14)
 # set y-axis label
-ax.set_ylabel("Promedio Alumnos",color=([255/255, 109/255, 197/255]),fontsize=14)
+ax.set_ylabel("Promedio Alumnos",color=([255/255, 109/255, 197/255]),fontsize=18)
 ax.set_ylim([1, 7])
 
 
@@ -78,13 +79,13 @@ ax2=ax.twinx()
 m.avg_grades_docentes.plot(kind='bar', color=([84/255, 88/255, 255/255]), ax=ax2, width=width, position=0)
 #ax2.bar(x=df[df['year']==2017]['region']+width, y=df[df['year']==2017]['avg_grades_docentes'],color=([84/255, 88/255, 255/255]),width= width, height = 10)
 
-ax2.set_ylabel("Promedio Docentes",color=([84/255, 88/255, 255/255]),fontsize=14)
+ax2.set_ylabel("Promedio Docentes",color=([84/255, 88/255, 255/255]),fontsize=18)
 ax2.set_ylim([1, 4])
-plt.xlabel("Regiones")
+plt.xlabel("Regiones", fontsize=30)
 ax.set_xticks(x)
-ax.set_xticklabels(labels)
+ax.set_xticklabels(labels, fontsize=18)
 plt.xlim([-1,15])
-plt.title("Rendimiento alumnos y docentes por region (2016)")
+plt.title("Rendimiento alumnos y docentes por region (2017)")
 
 
 plt.show()

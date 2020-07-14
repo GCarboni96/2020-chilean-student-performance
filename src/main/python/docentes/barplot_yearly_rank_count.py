@@ -39,11 +39,18 @@ cat_5 = df[df['year']==2017]
 
 cat_6 = df[df['year']==2018]
 
-sns.set(style='ticks')
+
+fig = plt.figure(figsize=(10, 7))
+fig.set_facecolor('#F5FBFB')
+sns.set(font_scale=2,style='ticks')
 
 color = ["#5C5CC4", "#E7478D", "#90C4FE", "#1BBC9D", "#FFBB4C"]
 ax = sns.countplot(x="year", hue="calificacion" ,data=df,palette=color)
+plt.legend(title='Clasificacion', loc='upper center', labels=['Básico', 'Competente', 'Insuficiente'])
+plt.title("Cantidad Clasificaciones docentes por establecimiento (2013-2018)")
+plt.xlabel("Año")
 
+plt.ylabel("Cantidad")
 plt.show()
 
 """

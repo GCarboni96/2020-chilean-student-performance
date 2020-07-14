@@ -39,21 +39,26 @@ cat_5 = df[df['year']==2017]
 cat_6 = df[df['year']==2018]
 
 
-
+plt.rcParams.update({'font.size': 14})
 X = df['year']
 #X = X + np.random.normal(size=X.shape)*0.07
 Y = df['avg_assistance']
 #Y = Y + np.random.normal(size=X.shape)*0.03
+
+
+fig = plt.figure(figsize=(10, 7))
+fig.set_facecolor('#F5FBFB')
 plt.bar(X, Y, width=0.8, bottom=None, align='center', data=None, color= ([84/255, 88/255, 255/255]))
 
+ax = plt.gca()
+ax.set_facecolor('#F5FBFB')
 
+ax.set_xticks([2003,2004,2005,2006,2007,2008,2009,2010,2011,2012,2013,2014,2015,2016,2017,2018])
 plt.xlim([2002,2019])
 plt.ylim([70,100])
 plt.xlabel("Años")
 plt.ylabel("Asistencia")
 plt.title("Asistencia alumnos por año (2003-2018)")
-plt.legend(['asistencia'
-            ], framealpha=0.5)
 
 
 plt.show()
