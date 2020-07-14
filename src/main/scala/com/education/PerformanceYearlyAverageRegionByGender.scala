@@ -4,10 +4,8 @@ import org.apache.spark.sql.types._
 import org.apache.spark.sql.{Row, SparkSession}
 import org.apache.spark.sql.functions._
 
-
-// Promedio general de estudiantes de cada region por año, con promedio general
 case class PerformanceYearlyAverageRegionByGender() {
-    def run(spark:SparkSession, out_path:String) {
+  def run(spark:SparkSession, out_path:String) {
         // selección de columnas año, cod_comuna, promedio_gral, genero_alum
         val cols = List("agno", "cod_com_rbd", "prom_gral", "gen_alu")
         // retrieve de data y seleccion de columnas 'cols'
@@ -22,12 +20,12 @@ case class PerformanceYearlyAverageRegionByGender() {
         // mapeo a ( (agno, cod_com_rbd), (prom_gral, varcontador) )
         val selectedMasc = rddMasc.map(t =>
             ((t.get(0), t.get(1)),
-             (t.get(2).toString.replace(',','.').toDouble, if (t.get(4) != 0) 1 else 0)))
+             (t.get(2).toString.replace(',','.').toDouble, if (t.get(3) != 0) 1 else 0)))
         
         // mapeo a ( (agno, cod_com_rbd), (prom_gral, varcontador) )
         val selectedFem = rddFem.map(t =>
             ((t.get(0), t.get(1)),
-             (t.get(2).toString.replace(',','.').toDouble, if (t.get(4) != 0) 1 else 0)))
+             (t.get(2).toString.replace(',','.').toDouble, if (t.get(3) != 0) 1 else 0)))
         
         // reducción por key (agno, prom_gral), (cod_com_rbd, varcontador)
         val groupedMasc = selectedMasc.reduceByKey((a, b) => (a._1 + b._1, a._2 + b._2))
@@ -69,8 +67,8 @@ case class PerformanceYearlyAverageRegionByGender() {
         val outFem = spark.sqlContext.createDataFrame(classedFem, schemaFem)
 
         // Haciendo Join de los resultados por genero
-        val outJoined = outMasc.join(outFem, Seq("year", "cod_com_rbd"), "inner")
-            .select(col("year"), col("cod_com_rbd"),
+        val outJoined = outMasc.join(outFem, Seq("year", "codigo_region"), "inner")
+            .select(col("year"), col("codigo_region"),
                     outFem.col("avg_grades_femenino"), outFem.col("avg_grades_rank_femenino"), 
                     outMasc.col("avg_grades_masculino"), outMasc.col("avg_grades_rank_masculino"))
         
