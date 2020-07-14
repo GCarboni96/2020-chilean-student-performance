@@ -47,6 +47,16 @@ colormap = np.array(['r', 'g', 'b'])
 
 colors = cm.rainbow(np.linspace(0, 1, 15))
 
+
+dict_markers = 	{
+    13113: "P",
+    13114: "8",
+    13115: "X",
+    13123: "^",
+    13132: "D"
+
+}
+
 for i in range(13101,13133):
     X = df[df['cod_comuna']==i][df['year']==2013]['avg_grades_docentes']
 
@@ -54,9 +64,9 @@ for i in range(13101,13133):
     Y = df[df['cod_comuna']==i][df['year']==2013]['avg_grades_alumnos']
     #Y = Y + np.random.normal(size=X.shape)*0.03
     if (i == 13113 or i == 13114 or i == 13115 or i == 13123 or i == 13132):
-        marker='*'
+        marker= dict_markers[i]
     else:
-        marker='.'
+        marker='o'
     plt.scatter(X, Y,color="b",alpha=0.5, label=df['nomb_comuna'], zorder=i,  marker=marker, s=80)
 
 
@@ -67,9 +77,9 @@ for i in range(13101,13133):
     Y = df[df['cod_comuna']==i][df['year']==2017]['avg_grades_alumnos']
     #Y = Y + np.random.normal(size=X.shape)*0.03
     if (i == 13113 or i == 13114 or i == 13115 or i == 13123 or i == 13132):
-        marker='*'
+        marker= dict_markers[i]
     else:
-        marker='.'
+        marker='o'
     plt.scatter(X, Y,color = "r",alpha=0.5, label=df['nomb_comuna'], zorder=i,  marker=marker, s=80)
 
 
