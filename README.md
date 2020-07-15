@@ -41,15 +41,32 @@ Finally, we studied our results by making graphs via Matplotlib and Seaborn, Pyt
 
 ## Results
 
-![Rendimiento alumnos por año](https://i.imgur.com/vtTY2E9.png)
+**Annual student reprobation by dependency**
+![Reprobacion Anual segun dependencia](https://i.imgur.com/sB46fNB.png)
 
-![Asistencia alumnos por año](https://i.imgur.com/xiHuQRE.png)
+**Annual student reprobation by rurality**
+![Reprobacion anual segun tipo de localidad](https://i.imgur.com/890X2uu.png)
 
-![Rendimiento alumnos por año](https://i.imgur.com/vtTY2E9.png)
+**Student's performance and assistance by school (2018)**
+![Rendimiento alumnos y su asistencia por establecimiento (2018)](https://i.imgur.com/lzM9lBU.png)
 
-![Rendimiento alumnos por año](https://i.imgur.com/vtTY2E9.png)
+**Student's yearly assistance**
+![Asistencia alumnos por año](https://i.imgur.com/K0IQ02C.png)
 
-![Rendimiento alumnos por año](https://i.imgur.com/vtTY2E9.png)
+**Student's yearly performance**
+![Rendimiento alumnos por año](https://i.imgur.com/tOaS1s0.png)
+
+**Teacher's grades by school**
+![Cantidad clasificaciones docentes por establecimiento](https://i.imgur.com/slKR7dR.png)
+
+**Teacher's grades by commune of Santiago**
+![Cantidad clasificaciones docentes por comuna de Santiago](https://i.imgur.com/k5Usd9q.png)
+
+**Student's performance and teacher's evaluation by region (2017)**
+![Rendimiento alumnos y docentes por region (2017)](https://i.imgur.com/mATReIf.png)
+
+**Student's performance and teacher's evaluation by commune of Santiago (2013 vs 2017)**
+![Rendimiento alumnos y docentes en Santiago (2013 vs 2017)](https://i.imgur.com/UUi9FsZ.jpg)
 
 
 
