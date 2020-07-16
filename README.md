@@ -58,6 +58,11 @@ There starts to be more reprobation on the urban schools since 2009 and the effe
 
 There seems to be a certain clustering between 80% and 100% assitance and 5 to 6.5 in student performance, which is expected.
 
+**Student's yearly performance by gender (difference)**
+![Rendimiento alumnos por año](https://i.imgur.com/ZAVYRpQ.png)
+
+In all years, female students tend to have a slightly better performance with a margin of 0.2.
+
 **Student's yearly assistance**
 ![Asistencia alumnos por año](https://i.imgur.com/K0IQ02C.png)
 
@@ -67,6 +72,7 @@ Most of this data is uniform, except for the year 2011.
 ![Rendimiento alumnos por año](https://i.imgur.com/tOaS1s0.png)
 
 There seems to be a considerable increase each year.
+
 
 **Teacher's grades by school**
 ![Cantidad clasificaciones docentes por establecimiento](https://i.imgur.com/slKR7dR.png)
@@ -90,21 +96,9 @@ There is a significant increase on both indicators from 2013 to 2018. However, t
 
 ## Conclusion
 
-1. se puede ver que la tasa de reprobacion baja a partir del año 2010-2012, y el efecto de la revolcion pinguina y movilizacion estuaintil 2006 y 2011
+One of the most important things to consider before doing or programming is to analyze the data you're working with, and define the exact information you're interested in. In our case, we programmed a lot of queries that we didn't really need because they didn't offer significant results in the end, which is why it could have been really convenient to know the exact variables we were interested in.
 
-2. se nota la mayor reprobacion en los urbanos a partir del 2009 y como el movimiento no afecta a los rurales
-
-3. se concentra en 80-100 asistencia y 5-6.5 de promedio. esta conecntracion es esperada
-
-4. la asistencia no presenta tantas bajas ni subidas (2011 es bajisima)
-
-5. en general esta sube a lo largo de los años
-
-6 y 7, se nota que como en los años 2016 y 2017 los profes aumentan su rendimiento, y por alguna razon esta baja el 2018
-
-8. el promedio de los alumnos no cambia mucho a lo largo de las regiones. el de los docentes tambien es homogeneo pero no tanto
-
-9. en general se puede apreciar que en santiago hay un amuento tantp de los profesores como de los alumnos. y los outliers mantienen su jerarquia frente a las demas comunas.
+Also, it is very important to know tools such as Spark if you want to work and study data of higher magnitudes or sizes. 
 
 ## Contributors
 
