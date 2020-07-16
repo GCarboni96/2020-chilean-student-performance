@@ -7,15 +7,31 @@ import org.apache.spark.sql.functions._
 case class PerformanceYearlyAverageByGender() {
   def run(spark:SparkSession, out_path:String){
     // selección de columnas año, id_estab, nombre_estab, promedio_gral, genero_alum
-    val cols = List("agno", "rbd", "nom_rbd", "PROM_GRAL", "GEN_ALU")
+    val cols = List("agno", "rbd", "nom_rbd", "prom_gral", "gen_alu")
     // retrieve de data y seleccion de columnas 'cols'
     val picked = PerformanceDataset().pick_columns(spark, cols)
+
+
     // exclusion de registros sin datos de id_estb(rbd) o sin promedio gral de estudiantes Masculinos
-    val filteredMasc = picked.filter(picked("rbd") =!= " " || picked("prom_gral") =!= 0 || picked("gen_alu") === 1)
-    val rddMasc = filteredMasc.rdd
+    val filteredMasc = picked.filter(picked("prom_gral") =!= 0)
+    filteredMasc.cache()
+    val filteredMasc2 = filteredMasc.filter(filteredMasc("gen_alu") === 1)
+    filteredMasc2.cache()
+
+    val rddMasc = filteredMasc2.rdd
+
+
+
     // exclusion de registros sin datos de id_estb(rbd) o sin promedio gral de estudiantes Femeninos
-    val filteredFem = picked.filter(picked("rbd") =!= " " || picked("prom_gral") =!= 0 || picked("gen_alu") === 2)
-    val rddFem = filteredFem.rdd
+    val filteredFem = picked.filter(picked("prom_gral") =!= 0)
+    filteredFem.cache()
+    val filteredFem2 = filteredFem.filter(filteredFem("gen_alu") === 2)
+    filteredFem2.cache()
+    filteredFem2.show()
+    val rddFem = filteredFem2.rdd
+
+
+
     
     // mapeo a ( (agno, rbd, nom_rbd), (prom_gral, varcontador) )
     val selectedMasc = rddMasc.map(t =>
