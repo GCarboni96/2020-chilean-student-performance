@@ -58,6 +58,11 @@ There starts to be more reprobation on the urban schools since 2009 and the effe
 
 There seems to be a certain clustering between 80% and 100% assitance and 5 to 6.5 in student performance, which is expected.
 
+**Student's yearly performance by gender**
+![Rendimiento alumnos por año](https://i.imgur.com/bvPYVcR.png)
+
+In all years, female students tend to have a slightly better performance.
+
 **Student's yearly assistance**
 ![Asistencia alumnos por año](https://i.imgur.com/K0IQ02C.png)
 
@@ -67,6 +72,7 @@ Most of this data is uniform, except for the year 2011.
 ![Rendimiento alumnos por año](https://i.imgur.com/tOaS1s0.png)
 
 There seems to be a considerable increase each year.
+
 
 **Teacher's grades by school**
 ![Cantidad clasificaciones docentes por establecimiento](https://i.imgur.com/slKR7dR.png)
