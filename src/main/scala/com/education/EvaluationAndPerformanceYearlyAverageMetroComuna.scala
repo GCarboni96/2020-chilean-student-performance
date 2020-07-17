@@ -9,8 +9,6 @@ import org.apache.spark.sql.{Row, SparkSession}
 case class EvaluationAndPerformanceYearlyAverageMetroComuna() {
   def run(spark:SparkSession, out_path:String) {
 
-
-
     // SACAMOS AÑO, ID_ESTB, NOMBRE_ESTB, AVG_GRADES PARA DOCENTES
     val cols = List("año_eval", "cod_reg_rbd","cod_com_rbd", "nom_com_rbd","pf_pje")
     val picked = EvaluationDataset().pick_columns(spark, cols)

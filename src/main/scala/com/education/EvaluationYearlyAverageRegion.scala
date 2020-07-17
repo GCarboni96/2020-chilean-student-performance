@@ -5,11 +5,14 @@ import org.apache.spark.sql.{Row, SparkSession}
 import org.apache.spark.sql.functions._
 
 
-//PROMEDIO GENERAL DE DOCENTES DE CADA ESTABLECIMIENTO POR AÑO, CON PROMEDIO GENERAL
+//PROMEDIO GENERAL DE DOCENTES DE CADA REGION POR AÑO
 case class EvaluationYearlyAverageRegion() {
   def run(spark:SparkSession, out_path:String) {
+    // selección de columnas año, id_region y pje
     val cols = List("año_eval", "cod_reg_rbd", "pf_pje")
+    // retrieve de data y seleccion de columnas 'cols'
     val picked = EvaluationDataset().pick_columns(spark, cols)
+    // exclusion de registros con id_reg vacío o ptje vacío
     val filtered = picked.filter(picked("cod_reg_rbd") =!=" " || picked("pf_pje") =!= 1 || picked("pf_pje") =!=" ")
     val filtered2 = filtered.na.replace(filtered.columns,Map(" " -> "9999"))
     val filtered3 = filtered2.filter(filtered2("cod_reg_rbd") =!= "9999")
@@ -20,21 +23,24 @@ case class EvaluationYearlyAverageRegion() {
     )
 
     val rdd = filtered5.rdd
-
+    // mapeo a ( (año_eval, cod_reg_rbd), (pf_pje, varcontador) )
     val selected = rdd.map(t =>
       ((t.get(0), t.get(1)),
         (t.get(2).toString.replace(',','.').toDouble,
       if (t.get(2)!=0) 1 else 0)))
 
+    // reduccion por key ( (año_eval, cod_reg_rbd), (pf_pje, varcontador) )
     val grouped = selected.reduceByKey((a,b) =>  (a._1 + b._1 , a._2 + b._2 ))
+    // mapeo a ( año_eval, cod_reg_rbd ,(sum(pf_pje)/ sum(varcontador)) )
     val averaged = grouped.map(t=> (t._1._1, t._1._2 ,t._2._1/t._2._2))
-
+    // mapeo a ( año_eval, cod_reg_rbd, (sum(pf_pje)/ sum(varcontador)), clasificacion )
     val classed = averaged.map(t=> Row(t._1,t._2, t._3,
     if (t._3 < 2.0){"I"}
     else if (t._3 >= 2.0 && t._3 < 2.5) {"B"}
     else if (t._3 >= 2.5 && t._3 < 3.0) {"C"}
     else {"D"}
     ))
+    // schemas de salida
     val schema = StructType(
       List(
         StructField(name="year", dataType = IntegerType, nullable = true),
@@ -44,6 +50,7 @@ case class EvaluationYearlyAverageRegion() {
       )
     )
     val out = spark.sqlContext.createDataFrame(classed, schema)
+    // guardado
     out.coalesce(1).write.option("header", "true").option("delimiter",";").csv(out_path)
   }
 }
